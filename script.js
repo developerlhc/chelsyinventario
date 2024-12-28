@@ -44,7 +44,7 @@ $(document).ready(function() {
 
            let  producto= product
             let precio= parseFloat(price)
-            let stock = parseFloat(stock)
+            let xstock = parseFloat(stock)
             let tipo =type
             let almacen= warehouse
         
@@ -56,7 +56,7 @@ $(document).ready(function() {
         
         const raw = JSON.stringify({
           "CPROCEDURE": "sp_RegistrarProducto",
-          "COBSERVACIONES": `{|producto|:|${producto}|,|precio|:${precio},|stock|:${stock},|tipo|:|${tipo}|,|almacen|:|${almacen}|}`
+          "COBSERVACIONES": `{|producto|:|${producto}|,|precio|:${precio},|stock|:${xstock},|tipo|:|${tipo}|,|almacen|:|${almacen}|}`
         });
         
         const requestOptions = {
