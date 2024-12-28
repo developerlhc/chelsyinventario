@@ -50,26 +50,29 @@ $(document).ready(function() {
             almacen: warehouse
         });
 
-        var sqlCommand = ` N'${jsonData}'`;
+        var sqlCommand = `'${jsonData}'`;
         console.log(sqlCommand);
 
-        $.ajax({
-            url: 'https://cenfelecsolutions.com/chelsy/Ejecutar',
-            type: 'POST',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({
-                "CPROCEDURE": "sp_RegistrarProducto",
-                "COBSERVACIONES": sqlCommand
-            }),
-            success: function(response) {
-                let myrpta=JSON.parse(response.Rpta);
-                alert(myrpta);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error al obtener los productos: " + error);
-            }
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Accept", "application/json");
+        
+        const raw = JSON.stringify({
+          "CPROCEDURE": "sp_RegistrarProducto",
+          "COBSERVACIONES": `{|producto|:|${producto}|,|precio|:${precio},|stock|:${stock},|tipo|:|${tipo}|,|almacen|:|${almacen}|}`
         });
+        
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("https://cenfelecsolutions.com/chelsy/Ejecutar", requestOptions)
+          .then((response) => alert( response.text()))
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
     
     });
 });
