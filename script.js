@@ -42,11 +42,11 @@ $(document).ready(function() {
         var type = $("#type").val();
         var warehouse = $("#warehouse").val();
 
-           let  producto= product,
-            precio= parseFloat(price),
-            stock = parseFloat(stock),
-            tipo =type,
-            almacen= warehouse
+           let  producto= product
+            let precio= parseFloat(price)
+            let stock = parseFloat(stock)
+            let tipo =type
+            let almacen= warehouse
         
 
 
