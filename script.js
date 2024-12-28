@@ -26,7 +26,7 @@ $(function() {
             message = "Producto nuevo";
             products.push(product);
         }
-
+        alert(message);
         $("#message").text(message);
     });
 });
