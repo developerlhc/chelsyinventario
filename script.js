@@ -1,32 +1,75 @@
-$(function() {
-    var products = ["Producto1", "Producto2", "Producto3"];
-    var brands = ["Marca1", "Marca2", "Marca3"];
-    var families = ["Familia1", "Familia2", "Familia3"];
+$(document).ready(function() {
+    var products = [];
+    
 
-    $("#product").autocomplete({
-        source: products
+    $.ajax({
+        url: 'https://cenfelecsolutions.com/chelsy/Ejecutar',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            "CPROCEDURE": "sp_listarproductos",
+            "COBSERVACIONES": ""
+        }),
+        success: function(response) {
+            let myrpta=JSON.parse(response.Rpta);
+            // Asumiendo que la respuesta es un array de productos
+            products = myrpta.map(function(item) {
+                return item.CPRODUCTODESC; // Ajusta esto según la estructura de tu respuesta
+            });
+
+            // Inicializar el autocompletado con los productos obtenidos
+            $("#product").autocomplete({
+                source: function(request, response) {
+                    var results = $.ui.autocomplete.filter(products, request.term);
+                    response(results.slice(0, 50)); // Limitar a 90 resultados
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al obtener los productos: " + error);
+        }
     });
 
-    $("#brand").autocomplete({
-        source: brands
-    });
-
-    $("#family").autocomplete({
-        source: families
-    });
+   
 
     $("#productForm").on("submit", function(event) {
         event.preventDefault();
-        var product = $("#product").val();
-        var message = "";
 
-        if (products.includes(product)) {
-            message = "Producto actualizado";
-        } else {
-            message = "Producto nuevo";
-            products.push(product);
-        }
-        alert(message);
-        $("#message").text(message);
+        var product = $("#product").val();
+        var price = $("#price").val();
+        var stock = $("#stock").val();
+        var type = $("#type").val();
+        var warehouse = $("#warehouse").val();
+
+        var jsonData = JSON.stringify({
+            producto: product,
+            precio: parseFloat(price),
+            stock: parseFloat(stock),
+            tipo: type,
+            almacen: warehouse
+        });
+
+        var sqlCommand = ` N'${jsonData}'`;
+        console.log(sqlCommand);
+
+        $.ajax({
+            url: 'https://cenfelecsolutions.com/chelsy/Ejecutar',
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+                "CPROCEDURE": "sp_RegistrarProducto",
+                "COBSERVACIONES": sqlCommand
+            }),
+            success: function(response) {
+                let myrpta=JSON.parse(response.Rpta);
+                alert(myrpta);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los productos: " + error);
+            }
+        });
+    
     });
 });
