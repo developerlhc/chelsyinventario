@@ -42,16 +42,13 @@ $(document).ready(function() {
         var type = $("#type").val();
         var warehouse = $("#warehouse").val();
 
-        var jsonData = JSON.stringify({
-            producto: product,
-            precio: parseFloat(price),
-            stock: parseFloat(stock),
-            tipo: type,
-            almacen: warehouse
-        });
+           let  producto= product,
+            precio= parseFloat(price),
+            stock = parseFloat(stock),
+            tipo =type,
+            almacen= warehouse
+        
 
-        var sqlCommand = `'${jsonData}'`;
-        console.log(sqlCommand);
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
