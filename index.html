@@ -12,8 +12,10 @@
         <h1>Inventario Chelsy</h1>
         <label for="product">Producto</label>
         <input type="text" id="product" placeholder="Ingresar producto">
-        <label for="price">Precio</label>
-        <input type="number" id="price" placeholder="Ingresar precio" step="0.01">
+        <label for="price">Precio venta</label>
+        <input type="number" id="price" placeholder="Ingresar precio compra" step="0.01">
+        <label for="price">Precio Compra</label>
+        <input type="number" id="priceventa" placeholder="Ingresar precio venta" step="0.01">
         <label for="stock">Stock</label>
         <input type="number" id="stock" placeholder="Ingresar cantidad" step="0.01">
         <label for="type">Tipo ingreso</label>
@@ -22,15 +24,31 @@
             <option value="Salida">Salida</option>
             <option value="StockActual">StockActual</option>
         </select>
+        <br>
         <label for="warehouse">Almacen</label>
         <select id="warehouse">
             <option value="5">Unicachi</option>
             <option value="8">Almacen1</option>
             <option value="9">Almacen2</option>
         </select>
+        <br>
         <button type="submit">Registrar</button>
     </form>
     <p id="message"></p>
+
+    <table id="productTable" style="display:none; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>Produc - Almacen</th>
+                <th>P.Comp</th>
+                <th>P.Vent</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+            
+        </tbody>
+    </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

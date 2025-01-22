@@ -2,10 +2,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 20px;
 }
 
 form {
@@ -16,14 +16,22 @@ form {
     width: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-input {
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+input, select {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    width: 100%;
 }
 
 button {
@@ -34,6 +42,7 @@ button {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
@@ -44,4 +53,23 @@ button:hover {
     margin-top: 10px;
     font-size: 14px;
     color: #333;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f9;
 }
